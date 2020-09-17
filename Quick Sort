@@ -1,0 +1,14 @@
+public static void QuickSort(int[] a)
+        {
+            QuickSort(a, 0, a.Length - 1);
+        }
+
+        private static void QuickSort(int[] a, int leftInd, int rightInd)
+        {
+            if (leftInd < rightInd)//if the chunk is at least 2 items
+            {
+                int pivotInd = ReArrange(a, leftInd, rightInd);
+                QuickSort(a, leftInd, pivotInd - 1);
+                QuickSort(a, pivotInd + 1, rightInd);
+            }
+        }

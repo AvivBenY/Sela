@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Linked_List1
+{
+    class Stack_Array<T>
+    {
+        int index;
+        T[] stack;
+
+        public Stack_Array(int size = 1024)
+        {
+            index = 0;
+            stack = new T[size];
+        }
+
+        public bool Push(T item)
+        {
+            if (IsFull()) return false;
+            stack[index] = item;
+            index++;
+            return true;
+        }
+
+        public bool Pop(out T item)
+        {
+            item = default;
+            if (IsEmpty()) return false;
+            item = stack[index];
+            index--;
+            return true;
+        }
+
+        public bool Peek(out T item)
+        {
+            item = default(T);
+            if (IsEmpty()) return false;
+            item = stack[index - 1];
+            return true;
+        }
+
+        // Can also write:    public bool IsEmpty() => index == 0;
+        public bool IsEmpty()
+        {
+            if (index == 0) return true;
+            return false;
+        }
+
+        public bool IsFull()
+        {
+            if (index == stack.Length) return true;
+            return false;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = index - 1; i > 0; i--)
+            {
+                sb.Append ($"{stack[i]}"); 
+            }
+            return sb.ToString();
+        }
+    }
+}

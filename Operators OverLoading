@@ -1,0 +1,60 @@
+using System;
+
+namespace How_To_Operator_OverLoading
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Rectangle r1 = new Rectangle() { Height = 100d, Width = 100d };
+            Rectangle r2 = new Rectangle() { Height = 50d, Width = 50d };
+            Rectangle r3 = r1 - r2;
+            bool res = r1 > r2;
+            r3++;
+            r1 -= r2;
+            r1 += r3;
+
+            Console.WriteLine(r1);
+        }
+    }
+
+    class Rectangle
+    {
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public double Area => Width * Height;
+        public override string ToString() => $"Rectangle => {Width} * {Height} = {Area}";
+        public static Rectangle operator -(Rectangle lR, Rectangle rR)
+        {
+            return new Rectangle()
+            {
+                Height = lR.Height - rR.Height,
+                Width = lR.Width - rR.Width
+            };
+        }
+        public static Rectangle operator +(Rectangle lR, Rectangle rR)
+        {
+            return new Rectangle()
+            {
+                Height = lR.Height + rR.Height,
+                Width = lR.Width + rR.Width
+            };
+        }
+          //comparison operators (must be implemented together)
+        public static bool operator <(Rectangle lR, Rectangle rR) => lR.Area < rR.Area;
+        public static bool operator >(Rectangle lR, Rectangle rR) => lR.Area > rR.Area;
+
+
+        public static Rectangle operator ++(Rectangle rectangle) => new Rectangle()
+        {
+            Height = rectangle.Height + rectangle.Height,
+            Width = rectangle.Width + rectangle.Width
+        };
+        public static Rectangle operator --(Rectangle rectangle) => new Rectangle()
+        {
+            Height = rectangle.Height - rectangle.Height,
+            Width = rectangle.Width - rectangle.Width
+        };
+
+    }
+}

@@ -1,0 +1,28 @@
+private static int ReArrange(int[] a, int leftInd, int rightInd)
+        {
+            int tmp;
+            //randomInd <- choose random index between leftInd - rightInd (both included)
+            //swap a[randomInd] <-> a[leftInd]
+
+            int pivot = a[leftInd];
+
+            while (leftInd < rightInd)
+            {
+                while (a[rightInd] >= pivot && leftInd != rightInd) rightInd--;
+                if (leftInd != rightInd)//small value found in "right" range
+                {
+                    tmp = a[leftInd];
+                    a[leftInd] = a[rightInd];
+                    a[rightInd] = tmp;
+                }
+                while (a[leftInd] <= pivot && leftInd != rightInd) leftInd++;
+                if (leftInd != rightInd)//big value found in "left" range
+                {
+                    tmp = a[leftInd];
+                    a[leftInd] = a[rightInd];
+                    a[rightInd] = tmp;
+                }
+            }
+
+            return leftInd;
+        }

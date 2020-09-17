@@ -1,0 +1,45 @@
+﻿using System;
+
+namespace DelegatesGit
+{
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Form form = new Form();
+            /*4*/
+            form.submit += Login;
+            /*4*/
+            form.submit += ByeBye;
+            form.OnSubmit();        // this isnt a part of the delegate, thats just the action when we click "submit"
+            Console.ReadLine();
+
+        }
+        static void Login(string user_name)
+        {
+            Console.WriteLine($"welcome {user_name}");
+        }
+        static void ByeBye(string user_name)
+        {
+            Console.WriteLine($"ok bye bye now {user_name}");
+        }
+    }
+    class Form
+    {
+        // delegate decleration 
+        /*1*/
+        public delegate void Submit(string u); // click is a type of delegate type void (string)
+
+        /*2*/
+        public Submit submit; // click is the func refference
+        /*3*/
+        public void OnSubmit() // method that gets a delegation
+        {
+            Console.WriteLine("please enter use name : ");
+            string user_name = Console.ReadLine();
+            submit(user_name);
+        }
+    }
+}
+}
